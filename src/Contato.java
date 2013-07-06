@@ -1,13 +1,12 @@
 import java.util.Set;
 
-
 public class Contato {
 	
 	private String nome;
 	
-	private Set telefones;
+	private Set<String> telefones;
 	
-	public Contato(String nome, Set telefone) {
+	public Contato(String nome, Set<String> telefone) {
 		this.nome = nome;
 		this.telefones = telefone;
 	}
@@ -20,11 +19,11 @@ public class Contato {
 		this.nome = nome;
 	}
 
-	public Set getTelefone() {
+	public Set<String> getTelefone() {
 		return telefones;
 	}
 
-	public void setTelefone(Set telefone) {
+	public void setTelefone(Set<String> telefone) {
 		this.telefones = telefone;
 	}
 
@@ -32,6 +31,4 @@ public class Contato {
 	public String toString() {
 		return "Contato [nome=" + nome + ", telefones=" + telefones + "]";
 	}
-	
-
 }

@@ -1,7 +1,7 @@
 import java.util.HashSet;
 import java.util.Set;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class AgendaTest {
 	@Test
 	public void adicionarContato() {
 		agenda = criarAgenda();
-		Set telefones = new HashSet();
+		Set<String> telefones = new HashSet<String>();
 		boolean b = telefones.add("3331-3534");
 		Contato contato = new Contato("Adriano", telefones);
 		agenda.adicionarContato(contato);
@@ -65,7 +65,7 @@ public class AgendaTest {
 	public void listarAgenda() {
 		agenda = criarAgenda();
 		//adicionar pelo menos um contato para listar
-		Set telefones = new HashSet();
+		Set<String> telefones = new HashSet<String>();
 		boolean tel1 = telefones.add("3331-3534");
 		boolean tel2 = telefones.add("3337-3534");
 		Contato contato = new Contato("Adriano", telefones);
