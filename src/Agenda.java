@@ -17,11 +17,13 @@ public class Agenda {
 	public void adicionarContato(Contato contato) {
 		if (!existe(contato))
 			this.contatos.add(contato);
-		else throw new AgendaException("Contato já existe") ;		
+		else throw new AgendaException("Contato já existe");
 	}
 	
 	public void removerContato(Contato contato) {
-		this.removerContato(contato);
+		if (existe(contato))
+			this.contatos.remove(contato);
+		else throw new AgendaException("Contato não existe na agenda");
 	}
 
 	public ArrayList<Contato> getContatos() {
@@ -34,11 +36,12 @@ public class Agenda {
 		
 		while (it.hasNext()) {
 			Contato contatoTemporario = (Contato) it.next();
+			//TODO comparar os telefones?
 			if (contatoTemporario.getNome().equalsIgnoreCase(contato.getNome())) {
 				return true;
 			}
 				
-		}		
+		}
 		return false;
 	}
 }

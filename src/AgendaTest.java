@@ -2,6 +2,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Assert;
+import org.junit.Before;
 
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ public class AgendaTest {
 
 	private Agenda agenda; 
 	
-	@Test
+	@Before
 	public void novaAgenda() {
 		agenda = criarAgenda();
 		Assert.assertTrue("Agenda está vazia", agenda.isVazia());
@@ -20,8 +21,7 @@ public class AgendaTest {
 	}
 	
 	@Test
-	public void adicionarContato() {
-		agenda = criarAgenda();
+	public void adicionarContato() {		
 		Set<String> telefones = new HashSet<String>();
 		boolean b = telefones.add("3331-3534");
 		Contato contato = new Contato("Adriano", telefones);
@@ -32,14 +32,8 @@ public class AgendaTest {
 	@Test (expected=AgendaException.class)
 	public void adicionarContatoDuplicado() {
 		//verificar os contatos que tem o mesmo nome e o mesmo telefone, nao pode permitir
-		agenda = criarAgenda();
-		Set telefones1 = new HashSet();
-		boolean tel1 = telefones1.add("3331-3534");
-		Contato contato1 = new Contato("Adriano", telefones1);
-		
-		Set telefones2 = new HashSet();
-		boolean tel2 = telefones2.add("3331-3534");
-		Contato contato2 = new Contato("Adriano", telefones2);
+		Contato contato1 = criarContato("Adriano", "3331-3734");		
+		Contato contato2 = criarContato("Adriano", "3331-3734");
 		
 		agenda.adicionarContato(contato1);
 		agenda.adicionarContato(contato2); // expect exception here
@@ -47,35 +41,44 @@ public class AgendaTest {
 	}
 	
 	@Test 
-	public void removerContatoExistente() {
-		agenda = criarAgenda();
+	public void removerContatoExistente() {		
+		Contato contato = criarContato("Adriano", "3331-3734");
+		agenda.adicionarContato(contato);		
+		agenda.removerContato(contato);
+		Assert.assertTrue(agenda.isVazia());
+	}
+
+	private Contato criarContato(String nome, String telefone) {
+		Set telefones1 = new HashSet();
+		boolean tel1 = telefones1.add(telefone);
+		Contato contato = new Contato("Adriano", telefones1);
+		return contato;
 	}
 	
-	@Test 
+	@Test(expected=AgendaException.class) 
 	public void removerContatoNaoExistente() {
-		agenda = criarAgenda();
+		agenda = criarAgenda();		
+		agenda.removerContato(criarContato("Adriano", "3331-3734"));		
 	}
 	
 	@Test
 	public void listarDetalhesDoContato() {
-		agenda = criarAgenda();
+		Assert.assertTrue(false);
 	}
 	
 	@Test
 	public void contatoIncompleto() {
 		//verificar se o nome é vazio OU telefone é vazio (um dos dois)
-		agenda = criarAgenda();
+		Assert.assertTrue(false);
 	}
 	
 	@Test
 	public void listarAgendaVazia() {
-		agenda = criarAgenda();
 		System.out.println(agenda.getContatos());
 	}
 
 	@Test
 	public void listarAgenda() {
-		agenda = criarAgenda();
 		//adicionar pelo menos um contato para listar
 		Set<String> telefones = new HashSet<String>();
 		boolean tel1 = telefones.add("3331-3534");
