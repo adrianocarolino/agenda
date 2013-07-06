@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Agenda {
@@ -14,7 +15,9 @@ public class Agenda {
 	}
 	
 	public void adicionarContato(Contato contato) {
-		this.contatos.add(contato);
+		if (!existe(contato))
+			this.contatos.add(contato);
+		else throw new AgendaException("Contato já existe") ;		
 	}
 	
 	public void removerContato(Contato contato) {
@@ -27,7 +30,15 @@ public class Agenda {
 	
 	public boolean existe(Contato contato) {
 		//se o nome E telefone existem entao o contato já existe na agenda
-		//if (contato.nome)
+		Iterator it = getContatos().iterator();
+		
+		while (it.hasNext()) {
+			Contato contatoTemporario = (Contato) it.next();
+			if (contatoTemporario.getNome().equalsIgnoreCase(contato.getNome())) {
+				return true;
+			}
+				
+		}		
 		return false;
 	}
 }
