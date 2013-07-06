@@ -5,11 +5,11 @@ public class Contato {
 	
 	private String nome;
 	
-	private Set telefone;
+	private Set telefones;
 	
 	public Contato(String nome, Set telefone) {
 		this.nome = nome;
-		this.telefone = telefone;
+		this.telefones = telefone;
 	}
 
 	public String getNome() {
@@ -21,12 +21,17 @@ public class Contato {
 	}
 
 	public Set getTelefone() {
-		return telefone;
+		return telefones;
 	}
 
 	public void setTelefone(Set telefone) {
-		this.telefone = telefone;
+		this.telefones = telefone;
+	}
+
+	@Override
+	public String toString() {
+		return "Contato [nome=" + nome + ", telefones=" + telefones + "]";
 	}
 	
-	
+
 }

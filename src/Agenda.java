@@ -21,7 +21,7 @@ public class Agenda {
 		this.removerContato(contato);
 	}
 
-	public ArrayList<Contato> listarContatos() {
+	public ArrayList<Contato> getContatos() {
 		return this.contatos;
 	}
 	

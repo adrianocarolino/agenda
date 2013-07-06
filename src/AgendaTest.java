@@ -27,7 +27,7 @@ public class AgendaTest {
 		boolean b = telefones.add("3331-3534");
 		Contato contato = new Contato("Adriano", telefones);
 		agenda.adicionarContato(contato);
-		Assert.assertEquals(1, agenda.listarContatos().size());
+		Assert.assertEquals(1, agenda.getContatos().size());
 	}
 	
 	@Test
@@ -56,8 +56,21 @@ public class AgendaTest {
 	}
 	
 	@Test
+	public void listarAgendaVazia() {
+		agenda = criarAgenda();
+		System.out.println(agenda.getContatos());
+	}
+
+	@Test
 	public void listarAgenda() {
-		
+		agenda = criarAgenda();
+		//adicionar pelo menos um contato para listar
+		Set telefones = new HashSet();
+		boolean tel1 = telefones.add("3331-3534");
+		boolean tel2 = telefones.add("3337-3534");
+		Contato contato = new Contato("Adriano", telefones);
+		agenda.adicionarContato(contato);
+		System.out.println(agenda.getContatos());
 	}
 
 }
