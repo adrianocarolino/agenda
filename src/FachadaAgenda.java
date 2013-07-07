@@ -25,4 +25,8 @@ public class FachadaAgenda {
 	public ArrayList<Contato> getContatos() {
 		return agenda.getContatos();
 	}
+	
+	public boolean isFull() {
+		return agenda.isFull();
+	}
 }

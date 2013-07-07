@@ -10,18 +10,24 @@ public class Agenda {
 
 	private ArrayList<Contato> contatos;
 	
+	private int limiteMaximoContatos = 999;
+	
 	public Agenda() {	
 		this.contatos = new ArrayList<Contato>();
 	}
 	
 	public boolean isVazia() {
-		return this.contatos.size() == 0;
+		return this.getContatos().size() == 0;
+	}
+	
+	public boolean isFull() {
+		return this.getContatos().size() == this.limiteMaximoContatos;
 	}
 	
 	public void adicionarContato(Contato contato) {
-		if (!this.existe(contato))
+		if (!this.existe(contato) && !this.isFull())
 			this.getContatos().add(contato);
-		else throw new AgendaException("Contato já existe na agenda.");
+		else throw new AgendaException("Contato já existe na agenda ou agenda está cheia.");
 	}
 	
 	public void removerContato(Contato contato) {
