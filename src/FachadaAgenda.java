@@ -29,4 +29,8 @@ public class FachadaAgenda {
 	public boolean isFull() {
 		return agenda.isFull();
 	}
+	
+	public boolean editarContato(Contato contatoAntigo, Contato novoContato) {
+		return agenda.editarContato(contatoAntigo, novoContato);
+	}
 }

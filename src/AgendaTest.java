@@ -3,7 +3,6 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
-
 import org.junit.Test;
 
 /**
@@ -91,21 +90,23 @@ public class AgendaTest {
 	
 	@Test(expected = AgendaException.class)
 	public void adicionarContatoComAgendaCheia() {
-		//tenta adicionar 1000 contatos na agenda
+		//tenta adicionar 1000 contatos na agenda, o que não é permitido
 		for (int i=0; i<1000; i++) {
 			fachadaAgenda.adicionarContato(criarContato("Contato " + i, Integer.toString(i)));
 		}
 	}
 	
 	@Test
-	public void listarAgenda() {
-		// adicionar pelo menos um contato para listar
-		Set<String> telefones = new HashSet<String>();
-		boolean tel1 = telefones.add("3331-3534");
-		boolean tel2 = telefones.add("3337-3434");
-		Contato contato = new Contato("Adriano", telefones);
-		fachadaAgenda.adicionarContato(contato);
+	public void retornaContatos() {
+		fachadaAgenda.adicionarContato(criarContato("Adriano", "3331-3734"));
 		System.out.println(fachadaAgenda.getContatos());
+	}
+	
+	@Test
+	public void editarContato() {
+		Contato contatoAntigo = criarContato("Fábio", "3337-2764");
+		Contato novoContato = criarContato("Fábio", "3335-2764");		
+		Assert.assertTrue(fachadaAgenda.editarContato(contatoAntigo, novoContato));
 	}
 
 }

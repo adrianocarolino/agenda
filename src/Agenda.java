@@ -56,5 +56,10 @@ public class Agenda {
 		return false;
 	}
 	
+	public boolean editarContato(Contato antigoContato, Contato novoContato) {
+		//TODO procurar o contato na lista e atualizar
+		//retornar TRUE se o contato for editado com sucesso
+		return false;
+	}
 	
 }
