@@ -1,5 +1,10 @@
 import java.util.Set;
 
+/**
+ * 
+ * @author Adriano Melo
+ *
+ */ 
 public class Contato {
 	
 	private String nome;
@@ -29,6 +34,6 @@ public class Contato {
 
 	@Override
 	public String toString() {
-		return "Contato [nome=" + nome + ", telefones=" + telefones + "]";
+		return "Contato: [nome=" + nome + ", telefones=" + telefones + "]";
 	}
 }

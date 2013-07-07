@@ -6,27 +6,30 @@ import org.junit.Before;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author Adriano Melo
+ *
+ */ 
 public class AgendaTest {
 
-	private Agenda agenda; 
+	private FachadaAgenda fachadaAgenda; 
 	
 	@Before
 	public void novaAgenda() {
-		agenda = criarAgenda();
-		Assert.assertTrue("Agenda está vazia", agenda.isVazia());
+		fachadaAgenda = criarAgenda();
+		Assert.assertEquals(0, fachadaAgenda.getContatos().size());
 	}
 	
-	public Agenda criarAgenda() {
-		return new Agenda();
+	public FachadaAgenda criarAgenda() {
+		return new FachadaAgenda();
 	}
 	
 	@Test
 	public void adicionarContato() {		
-		Set<String> telefones = new HashSet<String>();
-		boolean b = telefones.add("3331-3534");
-		Contato contato = new Contato("Adriano", telefones);
-		agenda.adicionarContato(contato);
-		Assert.assertEquals(1, agenda.getContatos().size());
+		Contato contato = criarContato("Adriano", "3331-3734");	
+		fachadaAgenda.adicionarContato(contato);
+		Assert.assertEquals(1, fachadaAgenda.getContatos().size());
 	}
 	
 	@Test (expected=AgendaException.class)
@@ -35,17 +38,17 @@ public class AgendaTest {
 		Contato contato1 = criarContato("Adriano", "3331-3734");		
 		Contato contato2 = criarContato("Adriano", "3331-3734");
 		
-		agenda.adicionarContato(contato1);
-		agenda.adicionarContato(contato2); // expect exception here
+		fachadaAgenda.adicionarContato(contato1);
+		fachadaAgenda.adicionarContato(contato2); // expect exception here
 		
 	}
 	
 	@Test 
 	public void removerContatoExistente() {		
 		Contato contato = criarContato("Adriano", "3331-3734");
-		agenda.adicionarContato(contato);		
-		agenda.removerContato(contato);
-		Assert.assertTrue(agenda.isVazia());
+		fachadaAgenda.adicionarContato(contato);		
+		fachadaAgenda.removerContato(contato);
+		Assert.assertEquals(0, fachadaAgenda.getContatos().size());
 	}
 
 	private Contato criarContato(String nome, String telefone) {
@@ -57,8 +60,8 @@ public class AgendaTest {
 	
 	@Test(expected=AgendaException.class) 
 	public void removerContatoNaoExistente() {
-		agenda = criarAgenda();		
-		agenda.removerContato(criarContato("Adriano", "3331-3734"));		
+		fachadaAgenda = criarAgenda();		
+		fachadaAgenda.removerContato(criarContato("Adriano", "3331-3734"));		
 	}
 	
 	@Test
@@ -74,7 +77,7 @@ public class AgendaTest {
 	
 	@Test
 	public void listarAgendaVazia() {
-		System.out.println(agenda.getContatos());
+		System.out.println(fachadaAgenda.getContatos());
 	}
 
 	@Test
@@ -84,8 +87,8 @@ public class AgendaTest {
 		boolean tel1 = telefones.add("3331-3534");
 		boolean tel2 = telefones.add("3337-3434");
 		Contato contato = new Contato("Adriano", telefones);
-		agenda.adicionarContato(contato);
-		System.out.println(agenda.getContatos());
+		fachadaAgenda.adicionarContato(contato);
+		System.out.println(fachadaAgenda.getContatos());
 	}
 
 }
