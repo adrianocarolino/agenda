@@ -48,6 +48,13 @@ public class AgendaTest {
 		fachadaAgenda.removerContato(contato);
 		Assert.assertEquals(0, fachadaAgenda.getContatos().size());
 	}
+	
+	@Test(expected = AgendaException.class)
+	public void removerContatoAgendaVazia() {
+		//tenta remover um contato da agenda quando ela está vazia
+		Contato contato = criarContato("Vamberto", "3335-3290");
+		fachadaAgenda.removerContato(contato);		
+	}
 
 	private Contato criarContato(String nome, String telefone) {
 		Set telefones = new HashSet();
@@ -65,7 +72,9 @@ public class AgendaTest {
 	@Test
 	public void listarDetalhesDoContato() {
 		//TODO só fazer um getContato na agenda e na fachada
-		Assert.assertTrue(false);
+		fachadaAgenda.adicionarContato(criarContato("Adriano", "3331-3734"));
+		Contato contato = fachadaAgenda.getContato("Adriano"); 
+		Assert.assertNotNull(contato);
 	}
 
 	@Test

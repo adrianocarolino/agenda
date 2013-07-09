@@ -30,6 +30,10 @@ public class FachadaAgenda {
 		return agenda.isFull();
 	}
 	
+	public Contato getContato(String nome) {
+		return agenda.getContato(nome);
+	}
+	
 	public boolean editarContato(Contato contatoAntigo, Contato novoContato) {
 		return agenda.editarContato(contatoAntigo, novoContato);
 	}

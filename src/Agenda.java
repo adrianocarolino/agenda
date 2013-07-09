@@ -4,7 +4,8 @@ import java.util.Iterator;
 /**
  * 
  * @author Adriano Melo
- *
+ * @author Fabio do Carmo
+ * @author Vamberto Lima
  */ 
 public class Agenda {
 
@@ -38,6 +39,19 @@ public class Agenda {
 
 	public ArrayList<Contato> getContatos() {
 		return this.contatos;
+	}
+	
+	public Contato getContato(String nome) {
+		//procura pelo nome na agenda toda 
+		Iterator it = getContatos().iterator();
+		
+		while (it.hasNext()) {
+			Contato contatoTemporario = (Contato) it.next();
+			if (contatoTemporario.getNome().equalsIgnoreCase(nome)) {
+				return contatoTemporario;
+			}				
+		}
+		return null;
 	}
 	
 	public boolean existe(Contato contato) {
