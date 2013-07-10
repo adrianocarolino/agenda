@@ -6,9 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
  * @author Adriano Melo
- * 
+ * @author Fábio Do Carmo
+ * @author Vamberto Lima
  */
 public class AgendaTest {
 
@@ -33,8 +33,7 @@ public class AgendaTest {
 
 	@Test(expected = AgendaException.class)
 	public void adicionarContatoDuplicado() {
-		// verificar os contatos que tem o mesmo nome e o mesmo telefone, nao
-		// pode permitir
+		// verificar os contatos que tem o mesmo nome e o mesmo telefone, não pode permitir
 		Contato contato1 = criarContato("Adriano", "3331-3734");
 		Contato contato2 = criarContato("Adriano", "3331-3734");
 		fachadaAgenda.adicionarContato(contato1);
@@ -71,21 +70,15 @@ public class AgendaTest {
 
 	@Test
 	public void listarDetalhesDoContato() {
-		//TODO só fazer um getContato na agenda e na fachada
 		fachadaAgenda.adicionarContato(criarContato("Adriano", "3331-3734"));
 		Contato contato = fachadaAgenda.getContato("Adriano"); 
 		Assert.assertNotNull(contato);
 	}
 
 	@Test
-	public void contatoIncompleto() {
-		//TODO verificar se o nome é vazio OU telefone é vazio (um dos dois)
-		Assert.assertTrue(false);
-	}
-
-	@Test
 	public void listarAgendaVazia() {
 		System.out.println(fachadaAgenda.getContatos());
+		Assert.assertEquals(0, fachadaAgenda.getContatos().size());
 	}
 
 	@Test
@@ -114,8 +107,24 @@ public class AgendaTest {
 	@Test
 	public void editarContato() {
 		Contato contatoAntigo = criarContato("Fábio", "3337-2764");
+		fachadaAgenda.adicionarContato(contatoAntigo);
 		Contato novoContato = criarContato("Fábio", "3335-2764");		
 		Assert.assertTrue(fachadaAgenda.editarContato(contatoAntigo, novoContato));
+	}
+	
+	@Test
+	public void numeroDeContatosNaAgenda() {
+		Contato contatoAntigo = criarContato("Fábio", "3337-2764");
+		fachadaAgenda.adicionarContato(contatoAntigo);
+		Assert.assertEquals(1, fachadaAgenda.getCount());
+	}
+	
+	@Test
+	public void removeTodosContatos() {
+		fachadaAgenda.adicionarContato(criarContato("Fábio", "3337-2764"));
+		fachadaAgenda.adicionarContato(criarContato("Adriano", "3331-3734"));
+		fachadaAgenda.clear();
+		Assert.assertEquals(0, fachadaAgenda.getCount());
 	}
 
 }

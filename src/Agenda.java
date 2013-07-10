@@ -61,19 +61,23 @@ public class Agenda {
 		
 		while (it.hasNext()) {
 			Contato contatoTemporario = (Contato) it.next();
-			//TODO comparar os telefones?
 			if (contatoTemporario.getNome().equalsIgnoreCase(contato.getNome())) {
 				return true;
-			}
-				
+			}				
 		}
 		return false;
 	}
 	
 	public boolean editarContato(Contato antigoContato, Contato novoContato) {
-		//TODO procurar o contato na lista e atualizar
-		//retornar TRUE se o contato for editado com sucesso
-		return false;
+		if (existe(antigoContato)) {
+			//substitui o antigo pelo novo
+			this.removerContato(antigoContato);
+			this.adicionarContato(novoContato);
+			return true;
+		} else throw new AgendaException("Contato não existe na agenda.");
 	}
-	
+
+	public void clear() {
+		this.contatos.clear();
+	}
 }

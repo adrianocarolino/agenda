@@ -5,7 +5,6 @@ import java.util.ArrayList;
  * @author Adriano Melo
  *
  */ 
-
 public class FachadaAgenda {
 	
 	private Agenda agenda;
@@ -36,5 +35,13 @@ public class FachadaAgenda {
 	
 	public boolean editarContato(Contato contatoAntigo, Contato novoContato) {
 		return agenda.editarContato(contatoAntigo, novoContato);
+	}
+	
+	public int getCount() {
+		return agenda.getContatos().size();
+	}
+	
+	public void clear() {
+		agenda.clear();
 	}
 }
