@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * 
  * @author Adriano Melo
  * @author Fabio do Carmo
  * @author Vamberto Lima

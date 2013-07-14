@@ -144,4 +144,16 @@ public class AgendaTest {
 		Assert.assertEquals(0, fachadaAgenda.getContatosFavoritos().size());
 	}
 
+	@Test(expected=AgendaException.class)
+	public void adicionaAosFavoritosSemQueContatoExistaNaAgenda() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		fachadaAgenda.adicionarContatoAosFavoritos(meuContato);
+	}
+	
+	@Test(expected=AgendaException.class)
+	public void removeDosFavoritosSemQueContatoExistaNaAgenda() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		fachadaAgenda.removeContatoDosFavoritos(meuContato);
+	}
+
 }

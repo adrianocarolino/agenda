@@ -47,11 +47,15 @@ public class FachadaAgenda {
 	}
 	
 	public void adicionarContatoAosFavoritos(Contato contato) {
-		agenda.getFavoritos().add(contato);
+		if (agenda.existe(contato) && !agenda.getFavoritos().contains(contato)) 
+			agenda.getFavoritos().add(contato);
+		else throw new AgendaException("Contato não existe na agenda.");
 	}
 	
 	public void removeContatoDosFavoritos(Contato contato) {
-		agenda.getFavoritos().remove(contato);
+		if (agenda.existe(contato) && agenda.getFavoritos().contains(contato))
+			agenda.getFavoritos().remove(contato);
+		else throw new AgendaException("Contato não existe na agenda ou nos favoritos.");
 	}
 	
 	public HashSet<Contato> getContatosFavoritos() {
