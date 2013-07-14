@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * 
@@ -13,8 +15,11 @@ public class Agenda {
 	
 	private int limiteMaximoContatos = 999;
 	
+	private HashSet<Contato> favoritos;
+	
 	public Agenda() {	
 		this.contatos = new ArrayList<Contato>();
+		this.favoritos = new HashSet<Contato>();
 	}
 	
 	public boolean isVazia() {
@@ -79,5 +84,9 @@ public class Agenda {
 
 	public void clear() {
 		this.contatos.clear();
+	}
+	
+	public HashSet<Contato> getFavoritos() {
+		return this.favoritos;
 	}
 }

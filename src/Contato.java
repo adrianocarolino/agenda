@@ -11,6 +11,8 @@ public class Contato {
 	
 	private Set<String> telefones;
 	
+	private boolean favorito;
+	
 	public Contato(String nome, Set<String> telefone) {
 		this.nome = nome;
 		this.telefones = telefone;
@@ -36,4 +38,14 @@ public class Contato {
 	public String toString() {
 		return "Contato: [nome=" + nome + ", telefones=" + telefones + "]";
 	}
+
+	public boolean isFavorito() {
+		return favorito;
+	}
+
+	public void setFavorito(boolean favorito) {
+		this.favorito = favorito;
+	}
+	
+	
 }

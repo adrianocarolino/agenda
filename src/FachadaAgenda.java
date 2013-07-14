@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * 
@@ -43,5 +44,17 @@ public class FachadaAgenda {
 	
 	public void clear() {
 		agenda.clear();
+	}
+	
+	public void adicionarContatoAosFavoritos(Contato contato) {
+		agenda.getFavoritos().add(contato);
+	}
+	
+	public void removeContatoDosFavoritos(Contato contato) {
+		agenda.getFavoritos().remove(contato);
+	}
+	
+	public HashSet<Contato> getContatosFavoritos() {
+		return agenda.getFavoritos();
 	}
 }

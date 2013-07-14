@@ -126,5 +126,22 @@ public class AgendaTest {
 		fachadaAgenda.clear();
 		Assert.assertEquals(0, fachadaAgenda.getCount());
 	}
+	
+	@Test
+	public void adicionaAosFavoritos() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		fachadaAgenda.adicionarContato(meuContato);
+		fachadaAgenda.adicionarContatoAosFavoritos(meuContato);
+		Assert.assertEquals(1, fachadaAgenda.getContatosFavoritos().size());
+	}
+	
+	@Test
+	public void removeDosFavoritos() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		fachadaAgenda.adicionarContato(meuContato);
+		fachadaAgenda.adicionarContatoAosFavoritos(meuContato);
+		fachadaAgenda.removeContatoDosFavoritos(meuContato);
+		Assert.assertEquals(0, fachadaAgenda.getContatosFavoritos().size());
+	}
 
 }
