@@ -33,7 +33,8 @@ public class AgendaTest {
 
 	@Test(expected = AgendaException.class)
 	public void adicionarContatoDuplicado() {
-		// verificar os contatos que tem o mesmo nome e o mesmo telefone, não pode permitir
+		// verificar os contatos que tem o mesmo nome e o mesmo telefone, não
+		// pode permitir
 		Contato contato1 = criarContato("Adriano", "3331-3734");
 		Contato contato2 = criarContato("Adriano", "3331-3734");
 		fachadaAgenda.adicionarContato(contato1);
@@ -47,12 +48,12 @@ public class AgendaTest {
 		fachadaAgenda.removerContato(contato);
 		Assert.assertEquals(0, fachadaAgenda.getContatos().size());
 	}
-	
+
 	@Test(expected = AgendaException.class)
 	public void removerContatoAgendaVazia() {
-		//tenta remover um contato da agenda quando ela está vazia
+		// tenta remover um contato da agenda quando ela está vazia
 		Contato contato = criarContato("Vamberto", "3335-3290");
-		fachadaAgenda.removerContato(contato);		
+		fachadaAgenda.removerContato(contato);
 	}
 
 	private Contato criarContato(String nome, String telefone) {
@@ -71,7 +72,7 @@ public class AgendaTest {
 	@Test
 	public void listarDetalhesDoContato() {
 		fachadaAgenda.adicionarContato(criarContato("Adriano", "3331-3734"));
-		Contato contato = fachadaAgenda.getContato("Adriano"); 
+		Contato contato = fachadaAgenda.getContato("Adriano");
 		Assert.assertNotNull(contato);
 	}
 
@@ -83,42 +84,45 @@ public class AgendaTest {
 
 	@Test
 	public void agendaCheia() {
-		//limite da agenda é de 999 contatos
-		for (int i=0; i<999; i++) {
-			fachadaAgenda.adicionarContato(criarContato("Contato " + i, Integer.toString(i)));
+		// limite da agenda é de 999 contatos
+		for (int i = 0; i < 999; i++) {
+			fachadaAgenda.adicionarContato(criarContato("Contato " + i,
+					Integer.toString(i)));
 		}
 		Assert.assertTrue(fachadaAgenda.isFull());
 	}
-	
+
 	@Test(expected = AgendaException.class)
 	public void adicionarContatoComAgendaCheia() {
-		//tenta adicionar 1000 contatos na agenda, o que não é permitido
-		for (int i=0; i<1000; i++) {
-			fachadaAgenda.adicionarContato(criarContato("Contato " + i, Integer.toString(i)));
+		// tenta adicionar 1000 contatos na agenda, o que não é permitido
+		for (int i = 0; i < 1000; i++) {
+			fachadaAgenda.adicionarContato(criarContato("Contato " + i,
+					Integer.toString(i)));
 		}
 	}
-	
+
 	@Test
 	public void retornaContatos() {
 		fachadaAgenda.adicionarContato(criarContato("Adriano", "3331-3734"));
 		System.out.println(fachadaAgenda.getContatos());
 	}
-	
+
 	@Test
 	public void editarContato() {
 		Contato contatoAntigo = criarContato("Fábio", "3337-2764");
 		fachadaAgenda.adicionarContato(contatoAntigo);
-		Contato novoContato = criarContato("Fábio", "3335-2764");		
-		Assert.assertTrue(fachadaAgenda.editarContato(contatoAntigo, novoContato));
+		Contato novoContato = criarContato("Fábio", "3335-2764");
+		Assert.assertTrue(fachadaAgenda.editarContato(contatoAntigo,
+				novoContato));
 	}
-	
+
 	@Test
 	public void numeroDeContatosNaAgenda() {
 		Contato contatoAntigo = criarContato("Fábio", "3337-2764");
 		fachadaAgenda.adicionarContato(contatoAntigo);
 		Assert.assertEquals(1, fachadaAgenda.getCount());
 	}
-	
+
 	@Test
 	public void removeTodosContatos() {
 		fachadaAgenda.adicionarContato(criarContato("Fábio", "3337-2764"));
@@ -126,7 +130,7 @@ public class AgendaTest {
 		fachadaAgenda.clear();
 		Assert.assertEquals(0, fachadaAgenda.getCount());
 	}
-	
+
 	@Test
 	public void adicionaAosFavoritos() {
 		Contato meuContato = criarContato("Fábio", "3337-2764");
@@ -134,7 +138,7 @@ public class AgendaTest {
 		fachadaAgenda.adicionarContatoAosFavoritos(meuContato);
 		Assert.assertEquals(1, fachadaAgenda.getContatosFavoritos().size());
 	}
-	
+
 	@Test
 	public void removeDosFavoritos() {
 		Contato meuContato = criarContato("Fábio", "3337-2764");
@@ -144,16 +148,77 @@ public class AgendaTest {
 		Assert.assertEquals(0, fachadaAgenda.getContatosFavoritos().size());
 	}
 
-	@Test(expected=AgendaException.class)
+	@Test(expected = AgendaException.class)
 	public void adicionaAosFavoritosSemQueContatoExistaNaAgenda() {
 		Contato meuContato = criarContato("Fábio", "3337-2764");
 		fachadaAgenda.adicionarContatoAosFavoritos(meuContato);
 	}
-	
-	@Test(expected=AgendaException.class)
+
+	@Test(expected = AgendaException.class)
 	public void removeDosFavoritosSemQueContatoExistaNaAgenda() {
 		Contato meuContato = criarContato("Fábio", "3337-2764");
 		fachadaAgenda.removeContatoDosFavoritos(meuContato);
 	}
 
+	@Test
+	public void retornaContatosDoGrupoFamilia() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setGrupo(Grupo.FAMILIA);
+		fachadaAgenda.adicionarContato(meuContato);
+		Assert.assertEquals(1, fachadaAgenda.getFamiliares().size());
+	}
+
+	@Test
+	public void retornaContatosDoGrupoAmigos() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setGrupo(Grupo.AMIGOS);
+		fachadaAgenda.adicionarContato(meuContato);
+		Assert.assertEquals(1, fachadaAgenda.getAmigos().size());
+	}
+
+	@Test
+	public void retornaContatosDoGrupoTrabalho() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setGrupo(Grupo.TRABALHO);
+		fachadaAgenda.adicionarContato(meuContato);
+		Assert.assertEquals(1, fachadaAgenda.getColegasDeTrabalho().size());
+	}
+
+	@Test
+	public void contatosSemGrupo() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setGrupo(Grupo.AMIGOS);
+		fachadaAgenda.adicionarContato(meuContato);
+		for (int i = 0; i < 10; i++) {
+			fachadaAgenda.adicionarContato(criarContato("Contato " + i,
+					Integer.toString(i)));
+		}
+		Assert.assertEquals(10, fachadaAgenda.getContatosSemGrupo().size());
+	}
+
+	@Test
+	public void alteraGrupoDeUmContato() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setGrupo(Grupo.FAMILIA);
+		fachadaAgenda.adicionarContato(meuContato);
+		meuContato.setGrupo(Grupo.AMIGOS);
+		Assert.assertEquals(1, fachadaAgenda.getAmigos().size());
+		Assert.assertEquals(0, fachadaAgenda.getFamiliares().size());
+	}
+
+	@Test
+	public void removeGrupoDeUmContato() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setGrupo(Grupo.AMIGOS);
+		fachadaAgenda.adicionarContato(meuContato);
+		meuContato.setGrupo(Grupo.SEM_GRUPO);
+		Assert.assertEquals(0, fachadaAgenda.getAmigos().size());
+		Assert.assertEquals(1, fachadaAgenda.getContatosSemGrupo().size());
+	}
+
+	@Test(expected = AgendaException.class)
+	public void grupoInvalido() {
+		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setGrupo(-3);
+	}
 }

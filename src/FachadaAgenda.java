@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * 
@@ -61,4 +62,33 @@ public class FachadaAgenda {
 	public HashSet<Contato> getContatosFavoritos() {
 		return agenda.getFavoritos();
 	}
+	
+	public ArrayList<Contato> getFamiliares() {
+		return getContatosDeGrupo(Grupo.FAMILIA);
+	}
+	
+	public ArrayList<Contato> getAmigos() {
+		return getContatosDeGrupo(Grupo.AMIGOS);
+	}
+	
+	public ArrayList<Contato> getColegasDeTrabalho() {
+		return getContatosDeGrupo(Grupo.TRABALHO);
+	}
+	
+	private ArrayList<Contato> getContatosDeGrupo(int idGrupo) {
+		Iterator it = agenda.getContatos().iterator();
+		ArrayList<Contato> contatosDoGrupo = new ArrayList<Contato>();
+		while (it.hasNext()) {
+			Contato c = (Contato) it.next();
+			if (c.getGrupo() == idGrupo)
+				contatosDoGrupo.add(c);
+		}
+		return contatosDoGrupo;
+	}
+	
+	public  ArrayList<Contato> getContatosSemGrupo() {
+		return getContatosDeGrupo(Grupo.SEM_GRUPO);
+	}
+	
+	
 }
