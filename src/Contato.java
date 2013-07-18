@@ -5,13 +5,15 @@ import java.util.Set;
  * @author Adriano Melo
  *
  */ 
-public class Contato {
+public class Contato implements Comparable<Contato>{
 	
 	private String nome;
 	
 	private Set<String> telefones;
 	
 	private int grupo;
+	
+	private boolean isFavorite;
 	
 	public Contato(String nome, Set<String> telefone) {
 		this.nome = nome;
@@ -48,6 +50,19 @@ public class Contato {
 		if (new Grupo().isValidGroup(idGrupo))
 			this.grupo = idGrupo;
 		else throw new AgendaException("Grupo inválido: " + idGrupo);
+	}
+
+	public boolean isFavorite() {
+		return isFavorite;
+	}
+
+	public void setFavorite(boolean isFavorite) {
+		this.isFavorite = isFavorite;
+	}
+
+	@Override
+	public int compareTo(Contato c) {
+		return nome.compareTo(c.getNome());
 	}
 	
 	

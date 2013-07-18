@@ -134,17 +134,17 @@ public class AgendaTest {
 	@Test
 	public void adicionaAosFavoritos() {
 		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setFavorite(true);
 		fachadaAgenda.adicionarContato(meuContato);
-		fachadaAgenda.adicionarContatoAosFavoritos(meuContato);
 		Assert.assertEquals(1, fachadaAgenda.getContatosFavoritos().size());
 	}
 
 	@Test
 	public void removeDosFavoritos() {
 		Contato meuContato = criarContato("Fábio", "3337-2764");
+		meuContato.setFavorite(true);
 		fachadaAgenda.adicionarContato(meuContato);
-		fachadaAgenda.adicionarContatoAosFavoritos(meuContato);
-		fachadaAgenda.removeContatoDosFavoritos(meuContato);
+		meuContato.setFavorite(false);
 		Assert.assertEquals(0, fachadaAgenda.getContatosFavoritos().size());
 	}
 
@@ -220,5 +220,27 @@ public class AgendaTest {
 	public void grupoInvalido() {
 		Contato meuContato = criarContato("Fábio", "3337-2764");
 		meuContato.setGrupo(-3);
+	}
+	
+	@Test
+	public void retornaContatosPorOrdemAlfabética() {
+		Contato meuContato1 = criarContato("Fábio", "3337-2774");
+		Contato meuContato2 = criarContato("Adriano", "3331-5764");
+		Contato meuContato3 = criarContato("Vamberto", "3335-2764");
+		Contato meuContato4 = criarContato("Sabrina", "3331-4794");
+		Contato meuContato5 = criarContato("João Paulo", "8871-4994");
+		Contato meuContato6 = criarContato("Alexandre", "8890-4794");
+		fachadaAgenda.adicionarContato(meuContato1);
+		fachadaAgenda.adicionarContato(meuContato2);
+		fachadaAgenda.adicionarContato(meuContato3);
+		fachadaAgenda.adicionarContato(meuContato4);
+		fachadaAgenda.adicionarContato(meuContato5);
+		fachadaAgenda.adicionarContato(meuContato6);
+		Assert.assertEquals(meuContato2, fachadaAgenda.getContatosPorOrdemAlfabetica().get(0));
+		Assert.assertEquals(meuContato6, fachadaAgenda.getContatosPorOrdemAlfabetica().get(1));
+		Assert.assertEquals(meuContato1, fachadaAgenda.getContatosPorOrdemAlfabetica().get(2));
+		Assert.assertEquals(meuContato5, fachadaAgenda.getContatosPorOrdemAlfabetica().get(3));
+		Assert.assertEquals(meuContato4, fachadaAgenda.getContatosPorOrdemAlfabetica().get(4));
+		Assert.assertEquals(meuContato3, fachadaAgenda.getContatosPorOrdemAlfabetica().get(5));
 	}
 }
