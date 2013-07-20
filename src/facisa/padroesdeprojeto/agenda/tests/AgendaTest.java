@@ -1,9 +1,17 @@
+package facisa.padroesdeprojeto.agenda.tests;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import facisa.padroesdeprojeto.agenda.Contato;
+import facisa.padroesdeprojeto.agenda.FachadaAgenda;
+import facisa.padroesdeprojeto.agenda.Grupo;
+import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 
 /**
  * @author Adriano Melo
@@ -80,16 +88,6 @@ public class AgendaTest {
 	public void listarAgendaVazia() {
 		System.out.println(fachadaAgenda.getContatos());
 		Assert.assertEquals(0, fachadaAgenda.getContatos().size());
-	}
-
-	@Test
-	public void agendaCheia() {
-		// limite da agenda é de 999 contatos
-		for (int i = 0; i < 999; i++) {
-			fachadaAgenda.adicionarContato(criarContato("Contato " + i,
-					Integer.toString(i)));
-		}
-		Assert.assertTrue(fachadaAgenda.isFull());
 	}
 
 	@Test(expected = AgendaException.class)
@@ -236,11 +234,12 @@ public class AgendaTest {
 		fachadaAgenda.adicionarContato(meuContato4);
 		fachadaAgenda.adicionarContato(meuContato5);
 		fachadaAgenda.adicionarContato(meuContato6);
-		Assert.assertEquals(meuContato2, fachadaAgenda.getContatosPorOrdemAlfabetica().get(0));
-		Assert.assertEquals(meuContato6, fachadaAgenda.getContatosPorOrdemAlfabetica().get(1));
-		Assert.assertEquals(meuContato1, fachadaAgenda.getContatosPorOrdemAlfabetica().get(2));
-		Assert.assertEquals(meuContato5, fachadaAgenda.getContatosPorOrdemAlfabetica().get(3));
-		Assert.assertEquals(meuContato4, fachadaAgenda.getContatosPorOrdemAlfabetica().get(4));
-		Assert.assertEquals(meuContato3, fachadaAgenda.getContatosPorOrdemAlfabetica().get(5));
+		List<Contato> contatosOrdenados = fachadaAgenda.getContatosPorOrdemAlfabetica();
+		Assert.assertEquals(meuContato2, contatosOrdenados.get(0));
+		Assert.assertEquals(meuContato6, contatosOrdenados.get(1));
+		Assert.assertEquals(meuContato1, contatosOrdenados.get(2));
+		Assert.assertEquals(meuContato5, contatosOrdenados.get(3));
+		Assert.assertEquals(meuContato4, contatosOrdenados.get(4));
+		Assert.assertEquals(meuContato3, contatosOrdenados.get(5));
 	}
 }

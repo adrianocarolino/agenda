@@ -1,4 +1,7 @@
+package facisa.padroesdeprojeto.agenda;
 import java.util.Set;
+
+import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 
 /**
  * 

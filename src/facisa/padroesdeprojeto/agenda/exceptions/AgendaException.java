@@ -1,3 +1,4 @@
+package facisa.padroesdeprojeto.agenda.exceptions;
 /**
  * 
  * @author Adriano Melo

@@ -1,7 +1,10 @@
+package facisa.padroesdeprojeto.agenda;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+
+import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 
 /**
  * 
@@ -26,10 +29,6 @@ public class FachadaAgenda {
 
 	public ArrayList<Contato> getContatos() {
 		return agenda.getContatos();
-	}
-
-	public boolean isFull() {
-		return agenda.isFull();
 	}
 
 	public Contato getContato(String nome) {
