@@ -1,9 +1,12 @@
-package facisa.padroesdeprojeto.agenda;
+package facisa.padroesdeprojeto.agenda.facade;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import facisa.padroesdeprojeto.agenda.Agenda;
+import facisa.padroesdeprojeto.agenda.Contato;
+import facisa.padroesdeprojeto.agenda.Grupo;
 import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 
 /**

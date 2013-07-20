@@ -9,9 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import facisa.padroesdeprojeto.agenda.Contato;
-import facisa.padroesdeprojeto.agenda.FachadaAgenda;
 import facisa.padroesdeprojeto.agenda.Grupo;
+import facisa.padroesdeprojeto.agenda.command.RemovePrimeiroContato;
+import facisa.padroesdeprojeto.agenda.command.RemoveTodosContatos;
+import facisa.padroesdeprojeto.agenda.command.Telefone;
 import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
+import facisa.padroesdeprojeto.agenda.facade.FachadaAgenda;
 
 /**
  * @author Adriano Melo
@@ -28,7 +31,7 @@ public class AgendaTest {
 		Assert.assertEquals(0, fachadaAgenda.getContatos().size());
 	}
 
-	public FachadaAgenda criarAgenda() {
+	private FachadaAgenda criarAgenda() {
 		return new FachadaAgenda();
 	}
 
@@ -242,4 +245,41 @@ public class AgendaTest {
 		Assert.assertEquals(meuContato4, contatosOrdenados.get(4));
 		Assert.assertEquals(meuContato3, contatosOrdenados.get(5));
 	}
+	
+	
+	@Test
+	public void testComandoRemoveTodosContatos() {
+		Telefone telefone = new Telefone();
+		
+		Contato meuContato1 = criarContato("Fábio", "3337-2774");
+		Contato meuContato2 = criarContato("Adriano", "3331-5764");
+		Contato meuContato3 = criarContato("Vamberto", "3335-2764");
+		
+		fachadaAgenda.adicionarContato(meuContato1);
+		fachadaAgenda.adicionarContato(meuContato2);
+		fachadaAgenda.adicionarContato(meuContato3);
+		
+		telefone.armazenarEExecutar(new RemoveTodosContatos(fachadaAgenda));
+		
+		Assert.assertEquals(0, fachadaAgenda.getCount());
+	}
+	
+	@Test
+	public void testComandoRemovePrimeiroContato() {
+		Telefone telefone = new Telefone();
+		
+		Contato meuContato1 = criarContato("Fábio", "3337-2774");
+		Contato meuContato2 = criarContato("Adriano", "3331-5764");
+		Contato meuContato3 = criarContato("Vamberto", "3335-2764");
+		
+		fachadaAgenda.adicionarContato(meuContato1);
+		fachadaAgenda.adicionarContato(meuContato2);
+		fachadaAgenda.adicionarContato(meuContato3);
+		
+		telefone.armazenarEExecutar(new RemovePrimeiroContato(fachadaAgenda));
+		
+		Assert.assertEquals(2, fachadaAgenda.getCount());		
+	}
+	
+	
 }
