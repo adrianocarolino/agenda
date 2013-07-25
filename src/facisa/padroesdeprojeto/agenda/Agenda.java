@@ -20,7 +20,7 @@ public class Agenda {
 	//a lista dos contatos
 	private ArrayList<Contato> contatos;
 
-	//limite máximo que a agenda suporte
+	//limite máximo que a agenda suporta
 	private int limiteMaximoContatos = 999;
 
 	/**
@@ -115,6 +115,12 @@ public class Agenda {
 		return false;
 	}
 
+	/**
+	 * Substitui um contato por outro
+	 * @param antigoContato
+	 * @param novoContato
+	 * @return
+	 */
 	public boolean editarContato(Contato antigoContato, Contato novoContato) {
 		if (existe(antigoContato)) {
 			// substitui o antigo pelo novo

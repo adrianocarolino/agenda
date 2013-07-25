@@ -25,6 +25,7 @@ import facisa.padroesdeprojeto.agenda.facade.FachadaAgenda;
  */
 public class AgendaTest {
 
+	//a fachada
 	private FachadaAgenda fachadaAgenda;
 
 	@Before
