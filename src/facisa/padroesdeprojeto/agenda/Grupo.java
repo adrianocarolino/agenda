@@ -2,6 +2,13 @@ package facisa.padroesdeprojeto.agenda;
 
 import java.util.HashSet;
 
+/**
+ * Data: 24/07/2013
+ * 
+ * @author Adriano Melo
+ * @author Fábio Do Carmo
+ * @author Vamberto Lima
+ */
 public class Grupo {
 
 	public static final int SEM_GRUPO = -1;
@@ -14,6 +21,9 @@ public class Grupo {
 
 	private static HashSet grupos;
 
+	/**
+	 * Construtor
+	 */
 	public Grupo() {
 		grupos = new HashSet();
 		grupos.add(SEM_GRUPO);
@@ -22,6 +32,11 @@ public class Grupo {
 		grupos.add(TRABALHO);
 	}
 
+	/**
+	 * Verifica se o grupo é valido
+	 * @param idGrupo
+	 * @return
+	 */
 	public boolean isValidGroup(int idGrupo) {
 		return grupos.contains(idGrupo);
 	}

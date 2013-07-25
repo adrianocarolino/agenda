@@ -10,22 +10,36 @@ import facisa.padroesdeprojeto.agenda.Grupo;
 import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 
 /**
+ * Data: 24/07/2013
  * 
  * @author Adriano Melo
- * 
+ * @author Fábio Do Carmo
+ * @author Vamberto Lima
  */
 public class FachadaAgenda {
 
+	//a agenda eletrônica
 	private Agenda agenda;
 
+	/**
+	 * Construtor
+	 */
 	public FachadaAgenda() {
 		agenda = new Agenda();
 	}
 
+	/**
+	 * Adiciona um contato na agenda  
+	 * @param contato o Contato
+	 */
 	public void adicionarContato(Contato contato) {
 		agenda.adicionarContato(contato);
 	}
 
+	/**
+	 * Remove um contato da agenda
+	 * @param contato o Contato
+	 */
 	public void removerContato(Contato contato) {
 		agenda.removerContato(contato);
 	}

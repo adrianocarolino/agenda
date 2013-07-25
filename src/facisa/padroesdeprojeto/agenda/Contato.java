@@ -4,10 +4,12 @@ import java.util.Set;
 import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 
 /**
+ * Data: 24/07/2013
  * 
  * @author Adriano Melo
- *
- */ 
+ * @author Fábio Do Carmo
+ * @author Vamberto Lima
+ */
 public class Contato implements Comparable<Contato>{
 	
 	private String nome;

@@ -9,28 +9,47 @@ import java.util.List;
 import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 
 /**
+ * Data: 24/07/2013
+ * 
  * @author Adriano Melo
- * @author Fabio do Carmo
+ * @author Fábio Do Carmo
  * @author Vamberto Lima
  */
 public class Agenda {
 
+	//a lista dos contatos
 	private ArrayList<Contato> contatos;
 
+	//limite máximo que a agenda suporte
 	private int limiteMaximoContatos = 999;
 
+	/**
+	 * Construtor
+	 */
 	public Agenda() {
 		this.contatos = new ArrayList<Contato>();
 	}
 
+	/**
+	 * Verifica se a agenda não tem nenhum contato
+	 * @return boolean true se a agenda tem pelo menos um contato
+	 */
 	public boolean isVazia() {
 		return this.getContatos().size() == 0;
 	}
 
+	/**
+	 * Verifica se a agenda está complementamente cheia
+	 * @return boolean true se a agenda está cheia
+	 */
 	public boolean isFull() {
 		return this.getContatos().size() == this.limiteMaximoContatos;
 	}
 
+	/**
+	 * Adiciona um contato na agenda
+	 * @param contato um Contato
+	 */
 	public void adicionarContato(Contato contato) {
 		if (!this.existe(contato) && !this.isFull())
 			this.getContatos().add(contato);
@@ -39,6 +58,10 @@ public class Agenda {
 					"Contato já existe na agenda ou agenda está cheia.");
 	}
 
+	/**
+	 * Remove um contato da agenda
+	 * @param contato um Contato
+	 */
 	public void removerContato(Contato contato) {
 		if (this.existe(contato))
 			this.getContatos().remove(contato);
@@ -46,14 +69,22 @@ public class Agenda {
 			throw new AgendaException("Contato não existe na agenda.");
 	}
 
+	/**
+	 * Retorna a lista de todos os contatos
+	 * @return List todos os contatos
+	 */
 	public ArrayList<Contato> getContatos() {
 		return this.contatos;
 	}
 
+	/**
+	 * Retorna o Contato pelo nome
+	 * @param nome
+	 * @return
+	 */
 	public Contato getContato(String nome) {
-		// procura pelo nome na agenda toda
+		// procura pelo nome na agenda
 		Iterator it = getContatos().iterator();
-
 		while (it.hasNext()) {
 			Contato contatoTemporario = (Contato) it.next();
 			if (contatoTemporario.getNome().equalsIgnoreCase(nome)) {
@@ -63,6 +94,11 @@ public class Agenda {
 		return null;
 	}
 
+	/**
+	 * Verifica se o contato já existe na agenda
+	 * @param contato
+	 * @return
+	 */
 	public boolean existe(Contato contato) {
 		// se o nome já existe, então o contato já existe na agenda. Não precisa
 		// comparar os telefones, pois
@@ -89,10 +125,17 @@ public class Agenda {
 			throw new AgendaException("Contato não existe na agenda.");
 	}
 
+	/**
+	 * Remove todos os contatos da agenda 
+	 */
 	public void clear() {
 		this.contatos.clear();
 	}
 
+	/**
+	 * Retorna a lista que contatos favoritos
+	 * @return
+	 */
 	public HashSet<Contato> getFavoritos() {
 		Iterator it = getContatos().iterator();
 		HashSet<Contato> favoritos = new HashSet<Contato>();
@@ -104,6 +147,10 @@ public class Agenda {
 		return favoritos;
 	}
 
+	/**
+	 * Retorna os contatos ordenados alfabeticamente
+	 * @return a lista de Contatos
+	 */
 	public List<Contato> getContatosPorOrdemAlfabetica() {
 		List contatosOrdenados = (List) getContatos().clone();
 		Collections.sort(contatosOrdenados);

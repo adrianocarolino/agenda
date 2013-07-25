@@ -17,6 +17,8 @@ import facisa.padroesdeprojeto.agenda.exceptions.AgendaException;
 import facisa.padroesdeprojeto.agenda.facade.FachadaAgenda;
 
 /**
+ * Data: 24/07/2013
+ * 
  * @author Adriano Melo
  * @author Fábio Do Carmo
  * @author Vamberto Lima
@@ -249,37 +251,28 @@ public class AgendaTest {
 	
 	@Test
 	public void testComandoRemoveTodosContatos() {
-		Telefone telefone = new Telefone();
-		
+		Telefone telefone = new Telefone();		
 		Contato meuContato1 = criarContato("Fábio", "3337-2774");
 		Contato meuContato2 = criarContato("Adriano", "3331-5764");
-		Contato meuContato3 = criarContato("Vamberto", "3335-2764");
-		
+		Contato meuContato3 = criarContato("Vamberto", "3335-2764");		
 		fachadaAgenda.adicionarContato(meuContato1);
 		fachadaAgenda.adicionarContato(meuContato2);
-		fachadaAgenda.adicionarContato(meuContato3);
-		
-		telefone.armazenarEExecutar(new RemoveTodosContatos(fachadaAgenda));
-		
+		fachadaAgenda.adicionarContato(meuContato3);		
+		telefone.armazenarEExecutar(new RemoveTodosContatos(fachadaAgenda));		
 		Assert.assertEquals(0, fachadaAgenda.getCount());
 	}
 	
 	@Test
 	public void testComandoRemovePrimeiroContato() {
 		Telefone telefone = new Telefone();
-		
 		Contato meuContato1 = criarContato("Fábio", "3337-2774");
 		Contato meuContato2 = criarContato("Adriano", "3331-5764");
 		Contato meuContato3 = criarContato("Vamberto", "3335-2764");
-		
 		fachadaAgenda.adicionarContato(meuContato1);
 		fachadaAgenda.adicionarContato(meuContato2);
-		fachadaAgenda.adicionarContato(meuContato3);
-		
+		fachadaAgenda.adicionarContato(meuContato3);		
 		telefone.armazenarEExecutar(new RemovePrimeiroContato(fachadaAgenda));
-		
 		Assert.assertEquals(2, fachadaAgenda.getCount());		
 	}
-	
 	
 }
